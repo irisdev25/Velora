@@ -23,7 +23,7 @@ if (registerForm) {
       localStorage.setItem('user', JSON.stringify(data.user));
       window.showToast('Registro exitoso', 'success');
       
-      const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris201922@gmail.com'];
+      const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris.dev25@gmail.com', 'iris201922@gmail.com'];
       const targetPage = admins.includes(data.user.email.toLowerCase()) ? '/pages/admin.html' : '/pages/dashboard.html';
       
       setTimeout(() => window.location.href = targetPage, 1000);
@@ -57,7 +57,7 @@ if (loginForm) {
       localStorage.setItem('user', JSON.stringify(data.user));
       window.showToast('Inicio de sesión exitoso', 'success');
       
-      const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris201922@gmail.com'];
+      const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris.dev25@gmail.com', 'iris201922@gmail.com'];
       const targetPage = admins.includes(data.user.email.toLowerCase()) ? '/pages/admin.html' : '/pages/dashboard.html';
       
       setTimeout(() => window.location.href = targetPage, 1000);
@@ -91,7 +91,7 @@ const checkAuth = () => {
 
   // Si es admin y está en una página de negocio, redirigir a admin.html
   if (user && token && protectedPages.includes(currentPage)) {
-      const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris201922@gmail.com'];
+      const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris.dev25@gmail.com', 'iris201922@gmail.com'];
       if (admins.includes(user.email.toLowerCase())) {
           window.location.href = '/pages/admin.html';
       }

@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris201922@gmail.com'];
+    const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris.dev25@gmail.com', 'iris201922@gmail.com'];
     
     if (!user || !admins.includes(user.email.toLowerCase())) {
         window.location.href = '/pages/dashboard.html'; // Redirigir si no es admin
