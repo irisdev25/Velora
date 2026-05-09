@@ -71,12 +71,23 @@
         
         // Manejar redirección
         const btn = document.getElementById('returnBtn');
-        const urlParams = new URLSearchParams(window.location.search);
-        const businessId = urlParams.get('business') || '1';
+        
+        // Función para obtener el businessId (soporta ?business=X o #business=X)
+        const getBusinessId = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('business')) return urlParams.get('business');
+            
+            const hashParams = new URLSearchParams(window.location.hash.substring(1));
+            if (hashParams.get('business')) return hashParams.get('business');
+            
+            return '1'; // Fallback
+        };
+
+        const businessId = getBusinessId();
 
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            window.location.href = `/pages/booking.html#business=${businessId}`;
+            window.location.href = `/pages/booking#business=${businessId}`;
         });
     </script>
 </body>

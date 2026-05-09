@@ -376,7 +376,7 @@ window.confirmBooking = async () => {
         if (!selectedService.requires_advance) {
             window.showToast('¡Reserva enviada! Tu cita está siendo revisada.', 'success');
             setTimeout(() => {
-                window.location.href = `/pages/booking-success.html?id=${res.id}&review=true`;
+                window.location.href = `/pages/booking-success.html?id=${res.id}&review=true&business=${businessId}`;
             }, 2000);
             return;
         }
@@ -494,7 +494,7 @@ const submitProofPayment = async () => {
         await ApiService.post('/payments/upload-proof', formData);
         window.showToast('¡Pago enviado! El negocio verificará tu cita pronto.', 'success');
         setTimeout(() => {
-            window.location.href = '/pages/booking-success.html?manual=true';
+            window.location.href = `/pages/booking-success.html?manual=true&business=${businessId}`;
         }, 2000);
     } catch (e) {
         console.error(e);
