@@ -1,6 +1,41 @@
 const winston = require('winston');
 const path = require('path');
 
+const transports = [];
+
+// En producción (Vercel), solo usamos la consola porque el sistema de archivos es de solo lectura
+if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
+  transports.push(
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
+      ),
+    })
+  );
+} else {
+  // En desarrollo local, guardamos en archivos y también mostramos en consola
+  transports.push(
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
+      ),
+    }),
+    new winston.transports.File({ 
+      filename: path.join(__dirname, '../logs/error.log'), 
+      level: 'error',
+      maxsize: 5242880,
+      maxFiles: 5,
+    }),
+    new winston.transports.File({ 
+      filename: path.join(__dirname, '../logs/combined.log'),
+      maxsize: 5242880,
+      maxFiles: 5,
+    })
+  );
+}
+
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
@@ -10,31 +45,7 @@ const logger = winston.createLogger({
     winston.format.json()
   ),
   defaultMeta: { service: 'velora-backend' },
-  transports: [
-    // Escribir errores en error.log
-    new winston.transports.File({ 
-      filename: path.join(__dirname, '../logs/error.log'), 
-      level: 'error',
-      maxsize: 5242880, // 5MB
-      maxFiles: 5,
-    }),
-    // Escribir todo en combined.log
-    new winston.transports.File({ 
-      filename: path.join(__dirname, '../logs/combined.log'),
-      maxsize: 5242880, // 5MB
-      maxFiles: 5,
-    }),
-  ],
+  transports: transports,
 });
-
-// Si no estamos en producción, también loguear a la consola con formato simple
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(new winston.transports.Console({
-    format: winston.format.combine(
-      winston.format.colorize(),
-      winston.format.simple()
-    ),
-  }));
-}
 
 module.exports = logger;
