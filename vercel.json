@@ -10,6 +10,7 @@
       "use": "@vercel/static"
     }
   ],
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/manifest.json",
@@ -28,8 +29,8 @@
       "destination": "/Backend/server.js"
     },
     {
-      "source": "/pages/(.*)",
-      "destination": "/Frontend/pages/$1"
+      "source": "/pages/:path*",
+      "destination": "/Frontend/pages/:path*.html"
     },
     {
       "source": "/css/(.*)",
