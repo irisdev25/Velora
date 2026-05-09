@@ -206,7 +206,9 @@ const renderSettingsTabs = () => {
             </div>
         </div>
 
-        <button id="saveSettingsBtn" class="save-button" onclick="saveSettings()">Guardar Todos los Cambios</button>
+        <div class="settings-footer">
+            <button id="saveSettingsBtn" class="save-button" onclick="saveSettings()">Guardar Todos los Cambios</button>
+        </div>
     `;
 
     // Attach listeners for real-time preview
