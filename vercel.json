@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Backend/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "Frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/Backend/server.js"
+    },
+    {
+      "source": "/pages/(.*)",
+      "destination": "/Frontend/pages/$1"
+    },
+    {
+      "source": "/css/(.*)",
+      "destination": "/Frontend/css/$1"
+    },
+    {
+      "source": "/js/(.*)",
+      "destination": "/Frontend/js/$1"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "/Frontend/assets/$1"
+    },
+    {
+      "source": "/uploads/(.*)",
+      "destination": "/Backend/server.js"
+    },
+    {
+      "source": "/",
+      "destination": "/Frontend/pages/index.html"
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+.auth-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+/* The radial purple gradient in the background */
+.auth-body::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 20%;
+  width: 80vw;
+  height: 80vw;
+  max-width: 800px;
+  max-height: 800px;
+  background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(11,9,10,0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 18px; color: #fff;
+}
+.logo-text {
+  font-size: 20px; font-weight: 700; color: #a855f7;
+}
+
+.form-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-main);
+  text-align: left;
+}
+
+.form-subtitle {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin-bottom: 40px;
+}
+
+.form-subtitle a {
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+  z-index: 5;
+}
+
+.password-toggle:hover {
+  color: var(--color-primary);
+}
+
+.password-toggle i {
+  width: 20px;
+  height: 20px;
+}
+
+.form-label {
+  position: absolute;
+  top: -10px;
+  left: 24px;
+  background: var(--bg-primary);
+  padding: 0 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 2;
+}
+
+.form-input {
+  width: 100%;
+  padding: 16px 24px;
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 100px;
+  color: var(--text-main);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.form-input::placeholder {
+  color: transparent; /* Labels take place of placeholder visually */
+}
+
+.form-error {
+  color: var(--accent-pink);
+  font-size: 13px;
+  margin-top: 6px;
+  margin-left: 24px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.forgot-password {
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 12px;
+  display: inline-block;
+  margin-left: 24px;
+}
+
+/* Auth Theme Toggle Position */
+.auth-toggle {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    z-index: 100;
+}
+
+/* Light Mode Overrides for Forms */
+[data-theme="light"] .auth-body {
+    background-color: #f1f5f9;
+}
+
+[data-theme="light"] .auth-body::before {
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+}
+
+[data-theme="light"] .form-input:focus {
+    background-color: rgba(124, 58, 237, 0.02);
+}
+
+[data-theme="light"] .password-toggle:hover {
+    background-color: rgba(0,0,0,0.03);
+}

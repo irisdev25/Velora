@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velora | Gestión de Reservas Inteligente</title>
+    <!-- Fonts -->
+    <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#7c3aed">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/landing.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon" style="width:32px; height:32px; font-size:16px;">V</div>
+                <span class="logo-text" style="font-size:16px;">Velora</span>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="active">Inicio</a>
+                <a href="#features">Funciones</a>
+                <a href="/pages/login.html">Acceder</a>
+                <a href="/pages/register.html" class="btn-primary">Registrar mi Negocio</a>
+                <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+                    <i data-lucide="sun"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>La agenda <span class="gradient-text">inteligente</span> que impulsa tu éxito</h1>
+                    <p>Velora transforma la manera en que gestionas tu negocio. Deja que tus clientes reserven 24/7 y enfócate en lo que realmente importa: tu talento.</p>
+                    <div class="hero-btns">
+                        <a href="/pages/register.html" class="btn-primary">Empieza Gratis</a>
+                        <a href="#features" class="btn-secondary">Ver Funciones</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="/assets/hero_mockup.png" alt="Velora Dashboard Mockup">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Diseñado para el crecimiento</h2>
+                <p>Herramientas potentes y elegantes para que tu negocio destaque frente a la competencia.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="zap"></i></div>
+                    <h3>Reserva Express</h3>
+                    <p>Enlace de reserva ultra-rápido para tus redes sociales. Tus clientes agendan en menos de 1 minuto.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="palette"></i></div>
+                    <h3>Marca Personalizada</h3>
+                    <p>Personaliza tu mini-sitio con tus colores, banner y logo. Tu esencia, tu marca, tu Velora.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="credit-card"></i></div>
+                    <h3>Pagos Integrados</h3>
+                    <p>Acepta Stripe, Pago Móvil o Zelle. Automatiza tus cobros y olvídate de la contabilidad manual.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="users"></i></div>
+                    <h3>Gestión de Personal</h3>
+                    <p>Asigna recursos y empleados a servicios específicos con calendarios independientes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="bar-chart-3"></i></div>
+                    <h3>Analítica en Vivo</h3>
+                    <p>Visualiza tus ingresos y el rendimiento de tus servicios en un panel intuitivo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="bell"></i></div>
+                    <h3>Recordatorios</h3>
+                    <p>Reduce las faltas con correos de confirmación y recordatorios automáticos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Planes que crecen contigo</h2>
+                <p>Elige el plan perfecto para la etapa actual de tu negocio.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Velora Free</h3>
+                    <div class="price">$0<span>/mes</span></div>
+                    <ul>
+                        <li><i data-lucide="check"></i> 15 citas al mes</li>
+                        <li><i data-lucide="check"></i> Calendario Básico</li>
+                        <li><i data-lucide="check"></i> 1 Miembro de Equipo</li>
+                        <li class="disabled"><i data-lucide="x"></i> Analíticas Pro</li>
+                    </ul>
+                    <a href="/pages/register.html" class="btn-secondary">Empezar Gratis</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="popular-tag">Más Popular</div>
+                    <h3>Velora Pro</h3>
+                    <div class="price">$19<span>/mes</span></div>
+                    <ul>
+                        <li><i data-lucide="check"></i> Citas Ilimitadas</li>
+                        <li><i data-lucide="check"></i> CRM Completo</li>
+                        <li><i data-lucide="check"></i> Analíticas Avanzadas</li>
+                        <li><i data-lucide="check"></i> Pagos con Stripe</li>
+                    </ul>
+                    <a href="/pages/register.html" class="btn-primary">Prueba Gratis</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Velora Enterprise</h3>
+                    <div class="price">$49<span>/mes</span></div>
+                    <ul>
+                        <li><i data-lucide="check"></i> Todo lo de Pro</li>
+                        <li><i data-lucide="check"></i> Soporte Prioritario</li>
+                        <li><i data-lucide="check"></i> Multisucursal</li>
+                        <li><i data-lucide="check"></i> Exportación de Datos</li>
+                    </ul>
+                    <a href="/pages/register.html" class="btn-secondary">Contáctanos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">Velora</div>
+                    <p>El estándar de oro en gestión de reservas para centros de estética, salud y educación.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Producto</h4>
+                    <ul>
+                        <li><a href="#">Funciones</a></li>
+                        <li><a href="#">Precios</a></li>
+                        <li><a href="#">Integraciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Compañía</h4>
+                    <ul>
+                        <li><a href="#">Acerca de</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="/pages/legal/privacy.html">Privacidad</a></li>
+                        <li><a href="/pages/legal/terms.html">Términos</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Velora Inc. Hecho con ❤️ para emprendedores.</p>
+                <div class="social-links">
+                    <!-- Social icons would go here -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/utils.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
+

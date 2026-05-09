@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Reservar cita - Velora</title>
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/booking.css">
+    <style id="businessStyles"></style>
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7c3aed">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .booking-header-with-banner {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            padding: 40px 20px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: -50px;
+            z-index: 1;
+        }
+        .booking-header-with-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: -1;
+        }
+        .header-content-wrapper {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        .social-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        .business-bio {
+            max-width: 600px;
+            margin: 10px auto;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="booking-container">
+        <div id="bookingHeader" class="booking-header">
+            <div class="header-content-wrapper">
+                <div id="logoContainer" class="logo-circle-container" style="display: none;"></div>
+                <h1>Reserva tu cita</h1>
+                <h2 id="businessName"></h2>
+                <p id="businessDescription">Vive una experiencia única con nosotros</p>
+                <div id="bioContainer" class="business-bio" style="display:none;"></div>
+                <div id="socialContainer" class="social-links" style="display:none;">
+                    <!-- Injected by JS -->
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-card" style="position:relative; z-index: 10; margin-top: 70px;">
+            <!-- Step 1: Service -->
+            <div class="booking-section">
+                <div class="section-title">
+                    <span>1. Elige un servicio</span>
+                </div>
+                <div id="serviceList" class="service-grid">
+                    <p class="loading-text">Cargando servicios disponibles...</p>
+                </div>
+            </div>
+
+            <!-- Step 2: Date -->
+            <div class="booking-section">
+                <div class="section-title">
+                    <span>2. ¿Cuándo vendrás?</span>
+                </div>
+                <div class="calendar-wrapper">
+                    <div id="calendarLegend" class="calendar-legend">
+                        <div class="legend-item"><span class="dot unavailable"></span> No disponible</div>
+                        <div class="legend-item"><span class="dot available"></span> Disponible</div>
+                        <div class="legend-item"><span class="dot selected"></span> Seleccionado</div>
+                        <div class="legend-item"><span class="dot confirmed"></span> Confirmado</div>
+                    </div>
+                    <div id="bookingCalendar" class="interactive-calendar">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+                <input type="hidden" id="appointmentDate" name="appointment_date">
+                <button id="lockDateBtn" class="btn-outline-small" style="margin-top: 15px; display: none; width: 100%;">Confirmar Fecha Seleccionada</button>
+            </div>
+
+            <!-- Step 3: Time -->
+            <div class="booking-section">
+                <div class="section-title">
+                    <span>3. Selecciona la hora</span>
+                </div>
+                <div id="timeSlots" class="slots-grid">
+                    <p class="muted-text">Selecciona una fecha primero</p>
+                </div>
+            </div>
+
+            <!-- Step 4: Personal Info -->
+            <div class="booking-section">
+                <div class="section-title">
+                    <span>4. Tus datos de contacto</span>
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="clientName">Nombre completo</label>
+                        <input type="text" id="clientName" name="client_name" class="form-input" placeholder="Tu nombre..." autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="clientEmail">Correo electrónico</label>
+                        <input type="email" id="clientEmail" name="client_email" class="form-input" placeholder="tu@email.com" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="clientPhone">Teléfono de contacto</label>
+                        <input type="tel" id="clientPhone" name="client_phone" class="form-input" placeholder="+58 412..." autocomplete="tel">
+                    </div>
+                </div>
+            </div>
+
+            <div id="bookingSummary" class="booking-summary" style="display: none;">
+                <h3>Confirmación de Reserva</h3>
+                <div id="summaryDetails" class="summary-details">
+                    <!-- Injected by JS -->
+                </div>
+                <div id="advancePaymentNote" class="advance-payment-note" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.2);">
+                    <!-- Injected by JS -->
+                </div>
+            </div>
+
+            <button id="confirmBookingBtn" class="btn-primary">Finalizar Reserva</button>
+        </div>
+        
+        <!-- Manual Payment Modal -->
+        <div id="manualPaymentModal" class="modal" style="display: none;">
+            <div class="modal-content" style="max-width: 500px;">
+                <h2 style="margin-bottom: 20px;">Instrucciones de Pago</h2>
+                <div id="paymentMethodsContainer" class="payment-methods-grid">
+                    <!-- Pago Móvil -->
+                    <div id="methodPM" class="payment-method-card" style="display: none; border: 1px solid var(--border-color); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+                        <h4 class="method-title" style="color: var(--color-primary); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;"><i data-lucide="smartphone"></i> Pago Móvil</h4>
+                        <div class="payment-field" style="margin-bottom: 8px;">
+                            <span class="field-label" style="font-size: 0.8rem; color: var(--text-muted);">Banco:</span>
+                            <div class="field-value-row" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span id="pmBankText" class="field-value" style="font-weight: 600;"></span>
+                                <button class="copy-btn" onclick="copyToClipboard('pmBankText')" style="background: none; border: none; cursor: pointer; color: var(--color-primary);"><i data-lucide="copy" style="width: 16px;"></i></button>
+                            </div>
+                        </div>
+                        <div class="payment-field" style="margin-bottom: 8px;">
+                            <span class="field-label" style="font-size: 0.8rem; color: var(--text-muted);">Cédula / RIF:</span>
+                            <div class="field-value-row" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span id="pmIdText" class="field-value" style="font-weight: 600;"></span>
+                                <button class="copy-btn" onclick="copyToClipboard('pmIdText')" style="background: none; border: none; cursor: pointer; color: var(--color-primary);"><i data-lucide="copy" style="width: 16px;"></i></button>
+                            </div>
+                        </div>
+                        <div class="payment-field">
+                            <span class="field-label" style="font-size: 0.8rem; color: var(--text-muted);">Teléfono:</span>
+                            <div class="field-value-row" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span id="pmPhoneText" class="field-value" style="font-weight: 600;"></span>
+                                <button class="copy-btn" onclick="copyToClipboard('pmPhoneText')" style="background: none; border: none; cursor: pointer; color: var(--color-primary);"><i data-lucide="copy" style="width: 16px;"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Zelle -->
+                    <div id="methodZelle" class="payment-method-card" style="display: none; border: 1px solid var(--border-color); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+                        <h4 class="method-title" style="color: var(--accent-cyan); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;"><i data-lucide="zap"></i> Zelle</h4>
+                        <div class="payment-field" style="margin-bottom: 8px;">
+                            <span class="field-label" style="font-size: 0.8rem; color: var(--text-muted);">Correo:</span>
+                            <div class="field-value-row" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span id="zelleEmailText" class="field-value" style="font-weight: 600;"></span>
+                                <button class="copy-btn" onclick="copyToClipboard('zelleEmailText')" style="background: none; border: none; cursor: pointer; color: var(--accent-cyan);"><i data-lucide="copy" style="width: 16px;"></i></button>
+                            </div>
+                        </div>
+                        <div class="payment-field">
+                            <span class="field-label" style="font-size: 0.8rem; color: var(--text-muted);">Titular:</span>
+                            <div class="field-value-row" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span id="zelleNameText" class="field-value" style="font-weight: 600;"></span>
+                                <button class="copy-btn" onclick="copyToClipboard('zelleNameText')" style="background: none; border: none; cursor: pointer; color: var(--accent-cyan);"><i data-lucide="copy" style="width: 16px;"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PayPal -->
+                    <div id="methodPaypal" class="payment-method-card" style="display: none; border: 1px solid var(--border-color); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+                        <h4 class="method-title" style="color: #0070ba; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;"><i data-lucide="send"></i> PayPal</h4>
+                        <div class="payment-field">
+                            <span class="field-label" style="font-size: 0.8rem; color: var(--text-muted);">Cuenta / Link:</span>
+                            <div class="field-value-row" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span id="paypalEmailText" class="field-value" style="font-weight: 600;"></span>
+                                <button class="copy-btn" onclick="copyToClipboard('paypalEmailText')" style="background: none; border: none; cursor: pointer; color: #0070ba;"><i data-lucide="copy" style="width: 16px;"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="font-size: 0.9rem; margin-bottom: 15px;">Para confirmar tu cita, por favor realiza la transferencia y sube una captura del comprobante aquí abajo:</p>
+                
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label class="form-label" for="proofFile">Sube tu comprobante (PDF o Imagen)</label>
+                    <input type="file" id="proofFile" name="proof" class="form-input" accept="image/*,application/pdf">
+                </div>
+
+                <div class="modal-actions" style="display: flex; gap: 10px;">
+                    <button id="submitProofBtn" class="btn-primary" style="flex: 1;">Enviar Comprobante</button>
+                    <button onclick="closePaymentModal()" class="btn-secondary" style="flex: 0.5;">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-footer">
+            &copy; <span id="currentYear"></span> · Velora Platform. Todos los derechos reservados.
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/apiService.js"></script>
+    <script src="../js/booking.js"></script>
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin - Velora Platform</title>
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    
+    <!-- Recursos Core -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    
+    <!-- Recurso Exclusivo Admin -->
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/components.css">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="admin-layout">
+    <div class="app-layout" style="width: 100%;">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon" style="background: var(--admin-purple);">V</div>
+                <span class="logo-text">Velora Admin</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i data-lucide="shield-check" class="nav-icon"></i>
+                        Gestión Global
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="logout()" class="nav-link">
+                        <i data-lucide="log-out" class="nav-icon"></i>
+                        Cerrar sesión
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer" style="text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 15px; margin-top: auto;">
+                <button class="theme-toggle-btn" onclick="toggleTheme()" title="Cambiar tema">
+                    <i data-lucide="sun"></i>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content" style="background: transparent; flex: 1; padding: 40px;">
+            <header style="margin-bottom: 40px;">
+                <h1 style="font-size: 32px; font-weight: 800; letter-spacing: -1px;">Panel Maestro</h1>
+                <p style="color: #94a3b8;">Administración general de la plataforma Velora</p>
+            </header>
+
+            <!-- Banners de Estadísticas -->
+            <div class="admin-banners">
+                <div class="stat-banner" style="background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);">
+                    <div class="stat-banner-content">
+                        <span class="stat-banner-label">Negocios Registrados</span>
+                        <div style="display: flex; align-items: baseline; gap: 15px;">
+                            <h2 class="stat-banner-value" id="totalUsers">-</h2>
+                            <span class="stat-banner-badge">↑ Activos</span>
+                        </div>
+                    </div>
+                    <i data-lucide="users" class="stat-banner-icon"></i>
+                </div>
+
+                <div class="stat-banner" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <div class="stat-banner-content">
+                        <span class="stat-banner-label">Reservas Totales</span>
+                        <div style="display: flex; align-items: baseline; gap: 15px;">
+                            <h2 class="stat-banner-value" id="totalAppointments">-</h2>
+                            <span class="stat-banner-badge">✓ Exitosas</span>
+                        </div>
+                    </div>
+                    <i data-lucide="calendar" class="stat-banner-icon"></i>
+                </div>
+
+                <div class="stat-banner" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);">
+                    <div class="stat-banner-content">
+                        <span class="stat-banner-label">Estado del Sistema</span>
+                        <div style="display: flex; align-items: baseline; gap: 15px;">
+                            <h2 class="stat-banner-value">100%</h2>
+                            <span class="stat-banner-badge">● Online</span>
+                        </div>
+                    </div>
+                    <i data-lucide="activity" class="stat-banner-icon"></i>
+                </div>
+            </div>
+
+            <!-- Gráficas -->
+            <div class="admin-charts-grid">
+                <div class="admin-chart-card">
+                    <h4 style="margin-bottom: 20px; color: #94a3b8;">Crecimiento Mensual</h4>
+                    <div style="height: 300px;"><canvas id="growthChart"></canvas></div>
+                </div>
+                <div class="admin-chart-card">
+                    <h4 style="margin-bottom: 20px; color: #94a3b8;">Distribución de Planes</h4>
+                    <div style="height: 300px;"><canvas id="plansChart"></canvas></div>
+                </div>
+            </div>
+
+            <!-- Tabla de Gestión -->
+            <div class="admin-table-card">
+                <h3 style="margin-bottom: 24px;">Gestión de Clientes</h3>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Negocio / ID</th>
+                                <th>Propietario / Correo</th>
+                                <th>Plan Actual</th>
+                                <th>Cambiar Nivel</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <!-- JS carga esto -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/apiService.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

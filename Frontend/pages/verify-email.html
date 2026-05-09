@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificar Correo - Velora</title>
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/forms.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="auth-body">
+  <div class="form-container" style="text-align: center;">
+    <div class="logo">Velora</div>
+    
+    <div id="loadingState">
+      <i data-lucide="loader-2" class="spin" style="width: 48px; height: 48px; color: var(--primary); margin-bottom: 20px;"></i>
+      <h2 class="form-title">Verificando tu correo...</h2>
+    </div>
+
+    <div id="successState" style="display: none;">
+      <i data-lucide="check-circle" style="width: 64px; height: 64px; color: #10b981; margin-bottom: 20px;"></i>
+      <h2 class="form-title">¡Correo verificado!</h2>
+      <p class="form-subtitle">Tu cuenta ha sido confirmada exitosamente. Ya puedes empezar a usar todas las funciones de Velora.</p>
+      <a href="/pages/login.html" class="btn-primary" style="text-decoration: none; display: inline-block; margin-top: 20px;">Ir a iniciar sesión</a>
+    </div>
+
+    <div id="errorState" style="display: none;">
+      <i data-lucide="x-circle" style="width: 64px; height: 64px; color: #ef4444; margin-bottom: 20px;"></i>
+      <h2 class="form-title">Error de verificación</h2>
+      <p class="form-subtitle" id="errorMessage">El enlace de verificación es inválido o ya ha expirado.</p>
+      <a href="/pages/login.html" class="btn-secondary" style="text-decoration: none; display: inline-block; margin-top: 20px;">Volver al inicio</a>
+    </div>
+  </div>
+
+  <script src="/js/utils.js"></script>
+  <script src="../js/config.js"></script>
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URL(window.location.href).searchParams;
+      const token = urlParams.get('token');
+      
+      const loadingState = document.getElementById('loadingState');
+      const successState = document.getElementById('successState');
+      const errorState = document.getElementById('errorState');
+      const errorMessage = document.getElementById('errorMessage');
+
+      if (!token) {
+        loadingState.style.display = 'none';
+        errorState.style.display = 'block';
+        errorMessage.textContent = 'Enlace inválido: no se encontró ningún token de verificación.';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/auth/verify-email/${token}`, {
+          method: 'GET',
+        });
+        
+        const data = await response.json();
+        
+        loadingState.style.display = 'none';
+        if (response.ok) {
+          successState.style.display = 'block';
+        } else {
+          errorState.style.display = 'block';
+          errorMessage.textContent = data.message || 'Hubo un problema al verificar el correo.';
+        }
+      } catch (error) {
+        console.error('Error verifying email:', error);
+        loadingState.style.display = 'none';
+        errorState.style.display = 'block';
+        errorMessage.textContent = 'Error de conexión con el servidor.';
+      }
+    });
+  </script>
+</body>
+</html>

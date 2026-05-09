@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Velora</title>
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/settings.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-text">Velora</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/pages/dashboard.html" class="nav-link">
+                        <i data-lucide="layout-dashboard" class="nav-icon"></i>
+                        Panel de control
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/pages/appointments.html" class="nav-link">
+                        <i data-lucide="calendar" class="nav-icon"></i>
+                        Citas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/pages/services.html" class="nav-link">
+                        <i data-lucide="wrench" class="nav-icon"></i>
+                        Servicios
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/pages/customers.html" class="nav-link">
+                        <i data-lucide="users" class="nav-icon"></i>
+                        Clientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/pages/settings.html" class="nav-link active">
+                        <i data-lucide="settings" class="nav-icon"></i>
+                        Configuración
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="logout()" class="nav-link">
+                        <i data-lucide="log-out" class="nav-icon"></i>
+                        Cerrar sesión
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer" style="text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 15px; margin-top: auto;">
+                <button class="theme-toggle-btn" onclick="toggleTheme()" title="Cambiar tema">
+                    <i data-lucide="sun"></i>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="settings-layout">
+                <div class="settings-main">
+                    <div class="settings-tabs">
+                        <button class="tab-btn active" onclick="switchTab('general')">General</button>
+                        <button class="tab-btn" onclick="switchTab('branding')">Diseño y Marca</button>
+                        <button class="tab-btn" onclick="switchTab('payments')">Horarios y Pagos</button>
+                        <button class="tab-btn" onclick="switchTab('resources')">Recursos</button>
+                        <button class="tab-btn" onclick="switchTab('billing')">Facturación</button>
+                        <button class="tab-btn" id="adminTabBtn" onclick="switchTab('admin')" style="display: none;">Admin Velora</button>
+                    </div>
+
+                    <div id="settings-form-container">
+                        <!-- El contenido dinámico de las pestañas se cargará aquí -->
+                        <p>Cargando configuración...</p>
+                    </div>
+                </div>
+
+                <div class="settings-preview-aside">
+                    <div class="preview-header">
+                        <h3>Vista Previa en Vivo</h3>
+                        <div class="preview-toggles">
+                            <button class="preview-toggle active" id="toggleMobile" onclick="setPreviewMode('mobile')">
+                                <i data-lucide="smartphone"></i>
+                            </button>
+                            <button class="preview-toggle" id="toggleDesktop" onclick="setPreviewMode('desktop')">
+                                <i data-lucide="monitor"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="device-mockup" class="device-mockup mobile">
+                        <div class="mockup-screen">
+                            <div id="booking-preview-iframe" class="preview-content">
+                                <!-- Mockup dinámico de la página de reserva -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="preview-hint">Los cambios se ven reflejados en tiempo real.</p>
+                </div>
+            </div>
+        </main>
+
+      <!-- Modal de Pago de Suscripción Premium -->
+    <div id="subscriptionModal" class="modal" style="display: none; backdrop-filter: blur(8px);">
+        <div class="modal-content" style="max-width: 500px; padding: 0; overflow: hidden; border-radius: 28px; background: var(--bg-primary); border: 1px solid var(--border-color); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+            
+            <!-- Cabecera con Degradado -->
+            <div style="background: linear-gradient(135deg, var(--color-primary), #6366f1); padding: 40px 30px; text-align: center; position: relative;">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background-image: url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E');"></div>
+                <div class="modal-icon-circle" style="background: rgba(255, 255, 255, 0.2); color: white; width: 70px; height: 70px; border-radius: 22px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);">
+                    <i data-lucide="crown" style="width: 35px; height: 35px;"></i>
+                </div>
+                <h2 style="color: white; font-size: 26px; font-weight: 800; margin: 0;">Sube al Nivel Pro</h2>
+                <p style="color: rgba(255,255,255,0.8); margin-top: 10px; font-size: 15px;">Estás a un paso de desbloquear todo el poder de Velora.</p>
+            </div>
+
+            <div style="padding: 30px;">
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Métodos de Pago Disponibles</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <!-- Pago Móvil Card -->
+                    <div class="premium-payment-card">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: rgba(168, 85, 247, 0.1); color: var(--color-primary); padding: 10px; border-radius: 12px;"><i data-lucide="smartphone"></i></div>
+                            <div>
+                                <div style="font-weight: 700; color: var(--text-main);">Pago Móvil</div>
+                                <div style="font-size: 13px; color: var(--text-muted);">Velora Bank · 12.345.678 · 0412-1234567</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Zelle Card -->
+                    <div class="premium-payment-card">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: rgba(6, 182, 212, 0.1); color: var(--accent-cyan); padding: 10px; border-radius: 12px;"><i data-lucide="zap"></i></div>
+                            <div>
+                                <div style="font-weight: 700; color: var(--text-main);">Zelle</div>
+                                <div style="font-size: 13px; color: var(--text-muted);">pagos@velora.com</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PayPal Card -->
+                    <div class="premium-payment-card">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: rgba(0, 112, 186, 0.1); color: #0070ba; padding: 10px; border-radius: 12px;"><i data-lucide="send"></i></div>
+                            <div>
+                                <div style="font-weight: 700; color: var(--text-main);">PayPal</div>
+                                <div style="font-size: 13px; color: var(--text-muted);">velora@paypal.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; display: grid; grid-template-columns: 1fr; gap: 12px;">
+                    <button onclick="window.location.href='mailto:velorasupport883@gmail.com?subject=Comprobante de Pago - Velora Plan Upgrade'" class="btn-primary" style="height: 55px; border-radius: 16px; font-weight: 700; font-size: 16px; box-shadow: 0 10px 20px -5px rgba(168, 85, 247, 0.4);">
+                        <i data-lucide="mail" style="margin-right: 10px; vertical-align: middle;"></i> Enviar Comprobante por Correo
+                    </button>
+                    <button onclick="document.getElementById('subscriptionModal').style.display='none'" class="btn-secondary" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); font-weight: 600;">
+                        Volver atrás
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/apiService.js"></script>
+    <script src="../js/settings.js"></script>
+    <script>
+        lucide.createIcons();
+        if (typeof updateToggleIcons === 'function') {
+            updateToggleIcons();
+        }
+    </script>
+</body>
+</html>

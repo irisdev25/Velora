@@ -1,0 +1,102 @@
+/* Frontend/css/loading.css */
+
+/* Shimmer Animation */
+@keyframes shimmer {
+    0% { background-position: -468px 0; }
+    100% { background-position: 468px 0; }
+}
+
+.skeleton-base {
+    background: var(--skeleton-bg);
+    background-image: linear-gradient(to right, var(--skeleton-bg) 0%, var(--skeleton-shimmer) 20%, var(--skeleton-bg) 40%, var(--skeleton-bg) 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 104px;
+    display: inline-block;
+    position: relative;
+    animation: shimmer 1.5s linear infinite forwards;
+    border-radius: 4px;
+}
+
+/* Skeleton Types */
+.skeleton-text {
+    height: 14px;
+    width: 100%;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.skeleton-title {
+    height: 24px;
+    width: 60%;
+    margin-bottom: 16px;
+    border-radius: 6px;
+}
+
+.skeleton-avatar {
+    height: 48px;
+    width: 48px;
+    border-radius: 12px;
+}
+
+.skeleton-circle {
+    border-radius: 50%;
+}
+
+.skeleton-rect {
+    height: 100px;
+    width: 100%;
+    border-radius: 16px;
+}
+
+.skeleton-card {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.skeleton-card .info-skeleton {
+    flex: 1;
+}
+
+/* Empty State Styles */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+.empty-state-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+.empty-state-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+
+.empty-state-description {
+    font-size: 15px;
+    max-width: 300px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}

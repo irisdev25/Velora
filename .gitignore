@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+.npm/
+
+# Variables de Entorno (¡MUY IMPORTANTE!)
+.env
+.env.local
+.env.production
+
+# Logs
+Backend/logs/
+*.log
+npm-debug.log*
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Subidas locales (ahora usamos Cloudinary)
+Backend/uploads/
+Backend/tmp/

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Reserva Exitosa! - Velora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/confirmation.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+        }
+        .success-card {
+            background: var(--card-bg);
+            padding: 48px;
+            border-radius: 24px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: white;
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="success-card">
+        <div class="icon-circle">
+            <i data-lucide="check-circle" size="40"></i>
+        </div>
+        <h1>¡Reserva Recibida!</h1>
+        <p>Estamos revisando su reserva en breves minutos le llegará un correo electrónico con la confirmación definitiva. ¡Muchas gracias por preferirnos!</p>
+        <a href="#" class="btn-primary" id="returnBtn">Realizar otra reserva</a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        // Manejar redirección
+        const btn = document.getElementById('returnBtn');
+        const urlParams = new URLSearchParams(window.location.search);
+        const businessId = urlParams.get('business') || '1';
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = `/pages/booking.html#business=${businessId}`;
+        });
+    </script>
+</body>
+</html>

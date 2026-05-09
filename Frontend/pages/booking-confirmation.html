@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/confirmation.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Sincronizar tema inmediatamente para evitar flash blanco
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="success-icon">
+            <i data-lucide="check-circle"></i>
+        </div>
+        <h1>¡Reserva Confirmada!</h1>
+        <p>Tu cita ha sido agendada exitosamente. Hemos enviado los detalles a tu correo electrónico.</p>
+        
+        <div class="booking-details" id="bookingDetails">
+            <div class="detail-item">
+                <div class="detail-label">Servicio</div>
+                <div class="detail-value" id="detailService">Cargando...</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Fecha</div>
+                <div class="detail-value" id="detailDate">Cargando...</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Hora</div>
+                <div class="detail-value" id="detailTime">Cargando...</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Nombre</div>
+                <div class="detail-value" id="detailName">Cargando...</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Email</div>
+                <div class="detail-value" id="detailEmail">Cargando...</div>
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <a href="#" id="returnBtn" class="btn-primary">Realizar otra reserva</a>
+            <button onclick="window.print()" class="btn-secondary">Imprimir</button>
+        </div>
+        
+        <div class="business-info" id="businessInfo">
+            Velora - Plataforma de reservas
+        </div>
+    </div>
+
+   <script src="/js/utils.js"></script>
+   <script src="../js/config.js"></script>
+   <script src="/js/apiService.js"></script>
+   <script src="../js/booking-confirmation.js"></script>
+</body>
+</html>
+
+

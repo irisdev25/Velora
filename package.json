@@ -1,0 +1,9 @@
+{
+  "name": "velora",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cd Backend && node server.js",
+    "dev": "cd Backend && nodemon server.js"
+  }
+}
