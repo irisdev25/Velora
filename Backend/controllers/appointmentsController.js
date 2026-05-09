@@ -114,7 +114,7 @@ const createAppointment = async (req, res) => {
     await syncWithCRM(newAppointment);
 
     // Enviar correo de "Solicitud Recibida" al cliente y notificación al negocio
-    EmailTaskService.sendBookingReceivedEmails(newAppointment);
+    await EmailTaskService.sendBookingReceivedEmails(newAppointment);
 
     res.status(201).json(newAppointment);
   } catch (error) {
@@ -151,7 +151,7 @@ const cancelAppointment = async (req, res) => {
     );
 
     // Enviar correo de cancelación en background
-    EmailTaskService.sendCancellationEmail(appt);
+    await EmailTaskService.sendCancellationEmail(appt);
 
     res.json({ message: 'Reserva cancelada con éxito' });
   } catch (error) {
@@ -211,7 +211,7 @@ const updateAppointmentStatus = async (req, res) => {
     // Si el estado cambió a 'confirmed', enviar correos de notificación
     if (status === 'confirmed') {
         const tokenRes = await pool.query('SELECT cancel_token FROM appointments WHERE id = $1', [id]);
-        EmailTaskService.sendNewBookingEmails(updatedAppt, tokenRes.rows[0]?.cancel_token);
+        await EmailTaskService.sendNewBookingEmails(updatedAppt, tokenRes.rows[0]?.cancel_token);
         // Sincronizar con CRM al confirmar (solo para el gasto)
         await syncWithCRM(updatedAppt, true);
     }
@@ -221,7 +221,7 @@ const updateAppointmentStatus = async (req, res) => {
         // Enviar notificación de rechazo con motivo
         updatedAppt.service_name = (await pool.query('SELECT name FROM services WHERE id = $1', [updatedAppt.service_id])).rows[0]?.name;
         // Reusar el servicio de cancelación pero con el motivo si se desea, o delegar al service
-        EmailTaskService.sendCancellationEmail(updatedAppt, rejection_reason);
+        await EmailTaskService.sendCancellationEmail(updatedAppt, rejection_reason);
     }
 
     res.json(updatedAppt);
