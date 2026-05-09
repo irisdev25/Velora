@@ -29,28 +29,12 @@
       "destination": "/Backend/server.js"
     },
     {
-      "source": "/pages/:path*",
-      "destination": "/Frontend/pages/:path*.html"
-    },
-    {
-      "source": "/css/(.*)",
-      "destination": "/Frontend/css/$1"
-    },
-    {
-      "source": "/js/(.*)",
-      "destination": "/Frontend/js/$1"
-    },
-    {
-      "source": "/assets/(.*)",
-      "destination": "/Frontend/assets/$1"
-    },
-    {
       "source": "/uploads/(.*)",
       "destination": "/Backend/server.js"
     },
     {
-      "source": "/",
-      "destination": "/Frontend/pages/index.html"
+      "source": "/(.*)",
+      "destination": "/Frontend/$1"
     }
   ]
 }
