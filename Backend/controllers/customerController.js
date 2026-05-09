@@ -34,25 +34,36 @@ exports.getCustomerDetails = async (req, res) => {
             ORDER BY a.appointment_date DESC, a.appointment_time DESC
         `, [customer.rows[0].email, userId]);
 
+        const notes = await pool.query(`
+            SELECT * FROM customer_notes 
+            WHERE customer_id = $1 AND business_id = $2
+            ORDER BY created_at DESC
+        `, [customerId, userId]);
+
         res.json({
             profile: customer.rows[0],
-            history: history.rows
+            history: history.rows,
+            notes: notes.rows
         });
     } catch (error) {
         res.status(500).json({ error: 'Error fetching customer details' });
     }
 };
 
-exports.updateNotes = async (req, res) => {
+exports.addNote = async (req, res) => {
     try {
-        const { notes } = req.body;
-        await pool.query(
-            'UPDATE customers SET notes = $1 WHERE id = $2 AND business_id = $3',
-            [notes, req.params.id, req.user.id]
+        const { content } = req.body;
+        const customerId = req.params.id;
+        const userId = req.user.id;
+
+        const result = await pool.query(
+            'INSERT INTO customer_notes (customer_id, business_id, content) VALUES ($1, $2, $3) RETURNING *',
+            [customerId, userId, content]
         );
-        res.json({ message: 'Notes updated' });
+        
+        res.json(result.rows[0]);
     } catch (error) {
-        res.status(500).json({ error: 'Error updating notes' });
+        res.status(500).json({ error: 'Error adding note' });
     }
 };
 

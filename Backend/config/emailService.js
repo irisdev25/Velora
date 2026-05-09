@@ -86,7 +86,7 @@ const sendBookingReceived = async (clientEmail, bookingDetails) => {
   const html = emailWrapper(displayName, 'Solicitud Recibida', 'linear-gradient(135deg,#6d28d9 0%,#4f46e5 100%)', body, `${displayName} · Desarrollado por Velora`);
 
   const info = await transporter.sendMail({
-    from: `"${displayName} (via Velora)" <${process.env.SMTP_USER}>`,
+    from: `"Velora" <${process.env.SMTP_USER}>`,
     to: clientEmail,
     subject: `📅 Solicitud de reserva recibida - ${displayName}`,
     html,
@@ -144,7 +144,7 @@ const sendBookingApproved = async (clientEmail, bookingDetails) => {
   const html = emailWrapper(displayName, 'Reserva Confirmada', 'linear-gradient(135deg,#059669 0%,#10b981 100%)', body, `${displayName} · Desarrollado por Velora`);
 
   const info = await transporter.sendMail({
-    from: `"${displayName} (via Velora)" <${process.env.SMTP_USER}>`,
+    from: `"Velora" <${process.env.SMTP_USER}>`,
     to: clientEmail,
     subject: `✅ Reserva Confirmada - ${displayName}`,
     html,
@@ -191,7 +191,7 @@ const sendBusinessNotification = async (businessEmail, bookingDetails) => {
   const html = emailWrapper(displayName, 'Nueva Reserva', 'linear-gradient(135deg,#065f46 0%,#059669 100%)', body, `${displayName} · Desarrollado por Velora`);
 
   const info = await transporter.sendMail({
-    from: `"Velora Notificaciones" <${process.env.SMTP_USER}>`,
+    from: `"Velora" <${process.env.SMTP_USER}>`,
     to: businessEmail,
     subject: `📬 Nueva reserva de ${client_name}`,
     html,
@@ -235,7 +235,7 @@ const sendAppointmentReminder = async (clientEmail, bookingDetails) => {
   const html = emailWrapper(displayName, 'Recordatorio de Cita', 'linear-gradient(135deg,#92400e 0%,#d97706 100%)', body, `${displayName} · Desarrollado por Velora`);
 
   const info = await transporter.sendMail({
-    from: `"${displayName} (via Velora)" <${process.env.SMTP_USER}>`,
+    from: `"Velora" <${process.env.SMTP_USER}>`,
     to: clientEmail,
     subject: `⏰ Recordatorio: Tu cita en ${displayName} es mañana`,
     html,
@@ -280,7 +280,7 @@ const sendCancellationConfirmation = async (clientEmail, bookingDetails) => {
   const html = emailWrapper(displayName, 'Reserva Cancelada', 'linear-gradient(135deg,#991b1b 0%,#ef4444 100%)', body, `${displayName} · Desarrollado por Velora`);
 
   const info = await transporter.sendMail({
-    from: `"${displayName} (via Velora)" <${process.env.SMTP_USER}>`,
+    from: `"Velora" <${process.env.SMTP_USER}>`,
     to: clientEmail,
     subject: `❌ Tu reserva en ${displayName} fue cancelada`,
     html,
