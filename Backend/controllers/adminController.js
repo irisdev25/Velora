@@ -3,7 +3,7 @@ const pool = require('../config/db');
 exports.getGlobalStats = async (req, res) => {
     try {
         // Verificar si es admin
-        const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris201922@gmail.com'];
+        const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris.dev25@gmail.com', 'iris201922@gmail.com'];
         if (!admins.includes(req.user.email.toLowerCase())) {
             return res.status(403).json({ message: 'Acceso denegado' });
         }

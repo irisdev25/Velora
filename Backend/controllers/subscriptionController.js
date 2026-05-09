@@ -28,7 +28,7 @@ exports.createCheckoutSession = async (req, res) => {
 exports.updateUserPlan = async (req, res) => {
     const { userEmail, newPlan } = req.body;
     
-    const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris201922@gmail.com'];
+    const admins = ['velorasupport883@gmail.com', 'irisdev25@gmail.com', 'iris.dev25@gmail.com', 'iris201922@gmail.com'];
     if (!admins.includes(req.user.email.toLowerCase())) {
         return res.status(403).json({ message: 'No tienes permisos de administrador' });
     }
